@@ -74,8 +74,6 @@ static bool matrix_is_mod = false;
  * This supports two cascaded hubs and four keyboards
  */
 USB usb_host;
-USBHub hub1(&usb_host);
-USBHub hub2(&usb_host);
 HIDBoot<HID_PROTOCOL_KEYBOARD>    kbd1(&usb_host);
 HIDBoot<HID_PROTOCOL_KEYBOARD>    kbd2(&usb_host);
 HIDBoot<HID_PROTOCOL_KEYBOARD>    kbd3(&usb_host);
@@ -84,6 +82,8 @@ KBDReportParser kbd_parser1;
 KBDReportParser kbd_parser2;
 KBDReportParser kbd_parser3;
 KBDReportParser kbd_parser4;
+USBHub hub1(&usb_host);
+USBHub hub2(&usb_host);
 
 
 extern "C"
@@ -185,15 +185,11 @@ extern "C"
             // restore LED state when keyboard comes up
             if (usb_state == USB_STATE_RUNNING) {
                 dprintf("speed: %s\n", usb_host.getVbusState()==FSHOST ? "full" : "low");
-                keyboard_set_leds(host_keyboard_leds());
+                led_set(host_keyboard_leds());
             }
         }
         matrix_scan_quantum();
         return 1;
-    }
-
-    bool matrix_is_modified(void) {
-        return matrix_is_mod;
     }
 
     bool matrix_is_on(uint8_t row, uint8_t col) {
@@ -252,10 +248,10 @@ extern "C"
 
     void led_set(uint8_t usb_led)
     {
-        kbd1.SetReport(0, 0, 2, 0, 1, &usb_led);
-        kbd2.SetReport(0, 0, 2, 0, 1, &usb_led);
-        kbd3.SetReport(0, 0, 2, 0, 1, &usb_led);
-        kbd4.SetReport(0, 0, 2, 0, 1, &usb_led);
+        if (kbd1.isReady()) kbd1.SetReport(0, 0, 2, 0, 1, &usb_led);
+        if (kbd2.isReady()) kbd2.SetReport(0, 0, 2, 0, 1, &usb_led);
+        if (kbd3.isReady()) kbd3.SetReport(0, 0, 2, 0, 1, &usb_led);
+        if (kbd4.isReady()) kbd4.SetReport(0, 0, 2, 0, 1, &usb_led);
         led_set_kb(usb_led);
     }
 

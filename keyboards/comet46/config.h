@@ -15,8 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
 
 #include "config_common.h"
 
@@ -27,7 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    SatT
 #define PRODUCT         Comet46
-#define DESCRIPTION     qmk keyboard firmware for Comet46
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -64,22 +62,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MODS_CTRL_MASK  (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTRL))
 #define MODS_ALT_MASK  (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
 #define MODS_GUI_MASK  (MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI))
-
-//UART settings for communication with the RF microcontroller
-#define SERIAL_UART_BAUD 1000000
-#define SERIAL_UART_DATA UDR1
-#define SERIAL_UART_UBRR (F_CPU / (16UL * SERIAL_UART_BAUD) - 1)
-#define SERIAL_UART_TXD_READY (UCSR1A & _BV(UDRE1))
-#define SERIAL_UART_RXD_PRESENT (UCSR1A & _BV(RXC1))
-#define SERIAL_UART_INIT() do { \
-    	/* baud rate */ \
-    	UBRR1L = SERIAL_UART_UBRR; \
-    	/* baud rate */ \
-    	UBRR1H = SERIAL_UART_UBRR >> 8; \
-    	/* enable TX and RX */ \
-    	UCSR1B = _BV(TXEN1) | _BV(RXEN1); \
-    	/* 8-bit data */ \
-    	UCSR1C = _BV(UCSZ11) | _BV(UCSZ10); \
-  	} while(0)
-
-#endif

@@ -15,8 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef REV3_CONFIG_H
-#define REV3_CONFIG_H
+#pragma once
 
 /* USB Device descriptor parameter */
 #define DEVICE_VER 0x0003
@@ -44,14 +43,17 @@
 #define MATRIX_COL_PINS { B8,  B2,  B10, A0, A1, A2, B0, A3, B1, A6, A7, B12, C13, B11, B9 }
 #define UNUSED_PINS
 
-#define NUMBER_OF_ENCODERS 1
 #define ENCODERS_PAD_A { B13 }
 #define ENCODERS_PAD_B { B14 }
 
 
 //Audio
 #undef AUDIO_VOICES
-#undef C6_AUDIO
+#undef AUDIO_PIN
+#define AUDIO_PIN A5
+#define AUDIO_PIN_ALT A4
+#define AUDIO_PIN_ALT_AS_NEGATIVE
+
 
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PLANCK_SOUND)
@@ -67,16 +69,8 @@
 #define AUDIO_CLICKY_FREQ_RANDOMNESS 1.5f
 #endif
 
-//configure qwiic micro_oled driver for the 128x32 oled
-#ifdef QWIIC_MICRO_OLED_ENABLE
-
-#undef I2C_ADDRESS_SA0_1
-#define I2C_ADDRESS_SA0_1 0b0111100
-#define LCDWIDTH      128
-#define LCDHEIGHT     32
-#define micro_oled_rotate_180
-
-#endif
+// configure oled driver for the 128x32 oled
+#define OLED_UPDATE_INTERVAL 33 // ~30fps
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 // #define DEBOUNCE 6
@@ -124,29 +118,6 @@
 //#define NO_ACTION_ONESHOT
 //#define NO_ACTION_MACRO
 //#define NO_ACTION_FUNCTION
-/*
- * MIDI options
- */
-
-/* Prevent use of disabled MIDI features in the keymap */
-//#define MIDI_ENABLE_STRICT 1
-
-/* enable basic MIDI features:
-   - MIDI notes can be sent when in Music mode is on
-*/
-
-#define MIDI_BASIC
-
-/* enable advanced MIDI features:
-   - MIDI notes can be added to the keymap
-   - Octave shift and transpose
-   - Virtual sustain, portamento, and modulation wheel
-   - etc.
-*/
-//#define MIDI_ADVANCED
-
-/* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
-//#define MIDI_TONE_KEYCODE_OCTAVES 2
 
 /* Haptic Driver initialization settings
  * Feedback Control Settings */
@@ -206,5 +177,3 @@
 // #define RGB_MATRIX_KEYPRESSES
 
 #define SOLENOID_PIN A14
-
-#endif

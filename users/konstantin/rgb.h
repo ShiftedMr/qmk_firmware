@@ -1,18 +1,29 @@
+/* Copyright 2019-2021 Konstantin Đorđević <vomindoraan@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #pragma once
 
 #include "quantum.h"
 
-typedef struct {
-    uint16_t h;  // 0–360
-    uint8_t  s;  // 0–255
-    uint8_t  v;  // 0–255
-} hsv_t;
+#define GODSPEED_BLUE     198, 68,  255
+#define GODSPEED_YELLOW   27,  153, 255
+#define MODERN_DOLCH_CYAN 110, 255, 108
+#define MODERN_DOLCH_RED  253, 255, 108
 
-typedef struct {
-    uint8_t r;  // 0–255
-    uint8_t g;  // 0–255
-    uint8_t b;  // 0–255
-} rgb_t;
-
-extern const hsv_t GODSPEED_BLUE;
-extern const hsv_t GODSPEED_YELLOW;
+extern const HSV godspeed_blue;
+extern const HSV godspeed_yellow;
+extern const HSV modern_dolch_cyan;
+extern const HSV modern_dolch_red;
