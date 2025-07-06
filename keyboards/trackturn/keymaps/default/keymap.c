@@ -123,5 +123,33 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             dprintf("VolDown\n");
         }
     }
-    return false;
+    return false; // if this is set to true the default encoder behavior runs as well as the items in this. e.g it would change volume as well as lights when in rgb mode
 }
+
+
+/*
+Example code to remap trackball button
+static bool trackball_pressed = false;
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    // Read the raw button state from the Pimoroni trackball
+    uint8_t buttons = pimoroni_trackball_buttons();
+
+    // Detect press/release edge
+    if (buttons & 0x01) {
+        if (!trackball_pressed) {
+            trackball_pressed = true;
+            tap_code(KC_ESC);  // Change this to any keycode or custom macro
+            dprintf("Trackball button -> KC_ESC\n");
+        }
+    } else {
+        trackball_pressed = false;
+    }
+
+    // Clear default mouse button behavior
+    mouse_report.buttons = 0;
+
+    return mouse_report;
+}
+
+*/
