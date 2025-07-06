@@ -1,0 +1,48 @@
+{
+  "keyboard_name": "trackturn",
+  "manufacturer": "Custom",
+  "maintainer": "spospartan104",
+  "processor": "STM32F103",
+  "bootloader": "stm32duino",
+
+  "usb": {
+    "device_version": "0.1.1",
+    "pid": "0x6061",
+    "vid": "0x0001"
+  },
+  "matrix_pins": {
+    "direct": [
+      ["A0", "B12"]
+    ]
+  },
+  "diode_direction": "COL2ROW",
+
+  "encoder": {
+    "rotary": [
+      {
+        "pin_a": "B13",
+        "pin_b": "B14",
+        "resolution": 4
+      }
+    ]
+  },
+
+  "i2c": {
+    "interfaces": [
+      {
+        "scl": "B8",
+        "sda": "B9"
+      }
+    ]
+  },
+
+  "layouts": {
+    "LAYOUT_default": {
+      "layout": [
+        { "label": "Encoder Button",   "x": 0, "y": 0, "matrix": [0, 0] },
+        { "label": "Trackball Button", "x": 1, "y": 0, "matrix": [0, 1] }
+      ]
+    }
+  }
+}
+

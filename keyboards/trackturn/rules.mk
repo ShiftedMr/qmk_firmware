@@ -1,0 +1,14 @@
+MCU = STM32F103
+BOOTLOADER = stm32duino
+
+DEBUG_ENABLE = yes
+ENCODER_ENABLE = yes
+EXTRAKEY_ENABLE = yes
+LTO_ENABLE = yes
+CONSOLE_ENABLE = yes
+POINTING_DEVICE_ENABLE = yes
+POINTING_DEVICE_DRIVER = pimoroni_trackball
+I2C_DRIVER = i2c_master
+SRC += drivers/sensors/pimoroni_trackball.c
+
+OPT_DEFS += -DPIMORONI_TRACKBALL_DEBUG
